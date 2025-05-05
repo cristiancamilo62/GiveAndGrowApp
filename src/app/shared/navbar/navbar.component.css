@@ -1,0 +1,119 @@
+/* ─── BARRA DE NAVEGACIÓN ───────────────────────── */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  margin-right: 20px;
+}
+
+.navbar-links {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+.navbar-links:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+/* ─── MENÚ DE USUARIO CON ICONO ──────────────────── */
+.user-menu {
+  position: relative; /* para que el dropdown se posicione respecto a este contenedor */
+}
+
+.user-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 8px;
+  font-size: 1.4rem;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.user-btn:hover {
+  color: #ffeb3b;
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+/* Dropdown oculto por defecto */
+.user-dropdown {
+  position: absolute;
+  top: calc(100%);
+  right: 0;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  min-width: 180px;
+  display: none;
+  z-index: 1001;
+}
+
+/* Mantiene el dropdown visible cuando el ratón está sobre el icono O sobre el propio menú */
+.user-menu:hover .user-dropdown,
+.user-menu .user-dropdown:hover {
+  display: block;
+}
+
+/* Ítems del dropdown */
+.user-dropdown li {
+  margin: 0;
+}
+
+.user-dropdown li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.user-dropdown li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* ─── BOTÓN GENERAL (queda oculto o lo puedes eliminar) ───────────────── */
+.navbar-btn {
+  display: none; /* Ya no se usa, puesto que usamos user-menu */
+}
+
+/* ─── OPCIONAL: Responsive ───────────────────────── */
+@media (max-width: 600px) {
+  .navbar-menu {
+    display: none; /* podrías implementar un “hamburger” aquí */
+  }
+}

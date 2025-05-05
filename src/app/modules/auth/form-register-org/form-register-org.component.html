@@ -1,0 +1,100 @@
+    <!-- FORMULARIO DE ORGANIZACIÓN -->
+    <form
+      class="card"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <h1 class="title">REGISTRAR ORGANIZACIÓN</h1>
+  
+      <!-- ─── NOMBRE ─────────────────────────────────────── -->
+      <label class="field">
+        <span>Nombre de la organización *</span>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Ej. Fundación Amigos del Futuro"
+        />
+        <small class="error" *ngIf="control('name').invalid && control('name').touched">
+          <ng-container *ngIf="control('name').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('name').errors?.['minlength']">Mínimo 3 caracteres.</ng-container>
+        </small>
+      </label>
+  
+      <!-- ─── DESCRIPCIÓN ───────────────────────────────── -->
+      <label class="field">
+        <span>Descripción *</span>
+        <textarea
+          formControlName="description"
+          placeholder="Cuéntanos qué hace tu organización"
+        ></textarea>
+        <small class="error" *ngIf="control('description').invalid && control('description').touched">
+          Requerido.
+        </small>
+      </label>
+  
+      <!-- ─── TELÉFONO ─────────────────────────────────── -->
+      <label class="field">
+        <span>Número de contacto *</span>
+        <input
+          type="tel"
+          formControlName="contactNumber"
+          placeholder="3001234567"
+        />
+        <small class="error" *ngIf="control('contactNumber').invalid && control('contactNumber').touched">
+          <ng-container *ngIf="control('contactNumber').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('contactNumber').errors?.['pattern']">Debe tener 7–15 dígitos.</ng-container>
+        </small>
+      </label>
+  
+      <!-- ─── EMAIL ────────────────────────────────────── -->
+      <label class="field">
+        <span>Correo electrónico *</span>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="org@ejemplo.com"
+        />
+        <small class="error" *ngIf="control('email').invalid && control('email').touched">
+          <ng-container *ngIf="control('email').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('email').errors?.['email']">Formato inválido.</ng-container>
+        </small>
+      </label>
+  
+      <!-- ─── CONTRASEÑA ───────────────────────────────── -->
+      <label class="field">
+        <span>Contraseña *</span>
+        <input type="password" formControlName="password" />
+        <small class="error" *ngIf="control('password').invalid && control('password').touched">
+          <ng-container *ngIf="control('password').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('password').errors?.['minlength']">Mínimo 8 caracteres.</ng-container>
+        </small>
+      </label>
+  
+      <!-- ─── DIRECCIÓN ────────────────────────────────── -->
+      <label class="field">
+        <span>Dirección física *</span>
+        <input
+          type="text"
+          formControlName="address"
+          placeholder="Calle 123 #45-67, Ciudad"
+        />
+        <small class="error" *ngIf="control('address').invalid && control('address').touched">
+          Requerido.
+        </small>
+      </label>
+  
+      <!-- ─── ERRORES Y BOTÓN ──────────────────────────── -->
+      <p class="error center" *ngIf="error()">{{ error() }}</p>
+  
+      <button class="btn" type="submit" [disabled]="!form.valid || loading()">
+        <span *ngIf="!loading()">Registrar organización</span>
+        <span *ngIf="loading()">Procesando…</span>
+      </button>
+  
+      <p class="center">
+        ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
+      </p>
+    </form>
+  
+    <div class="white"></div>

@@ -1,0 +1,111 @@
+<!-- home.component.html -->
+<app-navbar></app-navbar> <!-- Aquí estamos insertando el navbar -->
+
+<!-- Sección de llamada a la acción -->
+<section class="cta-header">
+  <h1>Haz la diferencia, sé voluntario</h1>
+  <p>Únete a nuestra comunidad y participa en proyectos que cambian vidas.</p>
+  <button routerLink="/programs" class="cta-btn">Ver Programas</button>
+</section>
+
+<!-- Sección "Quiénes Somos" -->
+<section class="about-section">
+  <h2>¿Quiénes somos?</h2>
+  <p>Somos una organización sin fines de lucro dedicada a mejorar la vida de las personas a través del trabajo voluntario. Buscamos empoderar a individuos y comunidades a través de nuestra red de voluntarios.</p>
+</section>
+
+<!-- Sección de Programas -->
+<section class="programs-section">
+  <h2>Nuestros Programas</h2>
+  <div class="programs-list">
+    <div class="program-item">
+      <h3>Ayuda en Refugios</h3>
+      <p>Trabaja directamente con personas que necesitan asistencia en refugios locales.</p>
+    </div>
+    <div class="program-item">
+      <h3>Reciclaje Comunitario</h3>
+      <p>Participa en proyectos de reciclaje para crear comunidades más sostenibles.</p>
+    </div>
+  </div>
+  <button routerLink="/programs" class="cta-btn">Ver Todos los Programas</button>
+</section>
+
+<!-- Sección de Testimonios -->
+<section class="testimonials-section">
+  <h2>Lo que dicen nuestros voluntarios</h2>
+  <div class="testimonial">
+    <p>"Ser voluntario me ha permitido conocer personas increíbles y contribuir a una causa noble. ¡Es una experiencia única!"</p>
+    <cite>- Juan Pérez</cite>
+  </div>
+</section>
+
+<!-- Sección de Beneficios del Voluntariado -->
+<section class="benefits-section">
+  <h2>Beneficios de ser voluntario</h2>
+  <ul>
+    <li>Adquirir nuevas habilidades.</li>
+    <li>Expandir tu red profesional.</li>
+    <li>Contribuir a la mejora de tu comunidad.</li>
+  </ul>
+</section>
+
+<!-- Sección de Proyectos Destacados -->
+<section class="projects-section">
+  <h2>Proyectos Destacados</h2>
+  <div class="project-gallery">
+    <div class="project-item">
+      <img src="proyecto1.jpg" alt="Proyecto 1">
+      <h3>Reforestación en el Parque Nacional</h3>
+      <p>Un esfuerzo conjunto para restaurar áreas verdes en nuestra ciudad.</p>
+    </div>
+    <div class="project-item">
+      <img src="proyecto2.jpg" alt="Proyecto 2">
+      <h3>Comedor Comunitario</h3>
+      <p>Proveer comida y apoyo a familias en situación de vulnerabilidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Sección "Cómo Funciona" -->
+<section class="how-it-works-section">
+  <h2>¿Cómo Funciona?</h2>
+  <ol>
+    <li>Regístrate en nuestra plataforma.</li>
+    <li>Elige un programa en el que desees participar.</li>
+    <li>Asiste a la orientación inicial.</li>
+    <li>¡Comienza a hacer la diferencia!</li>
+  </ol>
+</section>
+
+<!-- Formulario de Contacto -->
+<section class="contact-section">
+  <h2>Contáctanos</h2>
+  <form>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Correo Electrónico:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Mensaje:</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <button type="submit">Enviar Mensaje</button>
+  </form>
+</section>
+
+<!-- Ubicación en Mapa -->
+<section class="location-section">
+  <h2>Visítanos</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</section>
+
+<!-- Pie de Página -->
+<footer class="footer">
+  <div class="social-icons">
+    <a href="https://facebook.com" target="_blank">Facebook</a>
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+  </div>
+  <p>&copy; 2025 Voluntarios.org. Todos los derechos reservados.</p>
+</footer>
