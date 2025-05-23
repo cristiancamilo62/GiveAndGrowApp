@@ -49,10 +49,9 @@ export class FormRegisterComponent {
   
     const user = this.form.getRawValue() as User;
 
-    console.log(user);
     this.authService.registerUser(user).subscribe({
       /* -- callback de éxito -- */
-      next: (msg: string) => {            // texto devuelto por el backend
+      next: () => {            // texto devuelto por el backend
         this.form.reset();        // limpia los campos
         this.loading.set(false);  // spinner OFF
       },

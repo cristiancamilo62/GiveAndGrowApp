@@ -1,57 +1,234 @@
-.login-container {
-    max-width: 400px;
-    margin: 3rem auto;
-    padding: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    background: #fff;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.container{
+  display : grid;
+  grid-template-columns: 1/2fr;
+}
+
+.logo-container{
+  height: 100px;
+  box-shadow: 0 7px 6px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px 0px 40px;
+  
+}
+
+.logo-container img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  
+}
+
+.logo-container a .icon-home {
+  fill: #0e743d;
+  width: 30px;
+  height: 30px;
+  font-size: 2rem;
+  margin-right: 40px;
+}
+
+.icon-home:hover{
+  transform: translateY(-2px);
+  cursor: pointer;
+  transition: transform 0.2s; /* Aplica transición a color también */
+}
+/* ───────────────────────────────────────────────────────────────────
+   Tarjeta de login
+─────────────────────────────────────────────────────────────────── */
+.login-card {
+  display: grid;
+  grid-template-columns: 1.9fr 1.1fr; /* El primer hijo ocupará el doble de espacio */
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+}
+
+/* Header con logo y título */
+.login-header {
+  background: url(../../../../../public/login.jpg) no-repeat center center;
+  background-size: cover;
+  margin-top: 12px;
+  width: 100%;
+  height: 100%;
+}
+.login-container h2 {
+  margin-top: 4.5rem;
+  font-size: 1.75rem;
+  color: #0e743d;
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   Formulario
+─────────────────────────────────────────────────────────────────── */
+
+.login-card .login-container {
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 38px;
+  margin: 40px 90px 40px 0px; 
+}
+
+.login-form{
+  width: 80%;
+}
+
+/* Grupos de campo */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #555;
+}
+.form-group input {
+  width: 80%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 38px;
+  font-size: 1rem;
+  margin: 6px 0px 6px 0px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-group input:focus {
+  border-color: #0e743d;
+  box-shadow: 0 0 0 0.2px #0e743d;
+  outline: none;
+}
+.form-group input.invalid {
+  border-color: #e74c3c;
+}
+.form-group .error {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #e74c3c;
+}
+
+
+/* Botón de envío */
+.btn-submit {
+  width: 100%;
+  padding: 0.85rem;
+  background: #0e743d;
+  border: none;
+  border-radius: 38px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-submit:hover:not(:disabled) {
+  background: linear-gradient( 90deg, #0e743d, #0e743d );
+  transform: translateY(-2px);
+}
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.login-forgot p {
+  text-align: center;
+}
+.login-forgot a{
+  color: #0e743d;
+  text-decoration: none;
+}
+.login-forgot p:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Pie de formulario */
+.login-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.login-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #0e743d;
+}
+.login-footer a {
+  color:#0e743d;
+  font-weight: bold;
+}
+.login-footer a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   Responsive
+─────────────────────────────────────────────────────────────────── */
+@media (max-width: 1250px) {
+  
+  .login-card {
+  grid-template-columns: 1.6fr 1.1fr; /* El primer hijo ocupará el doble de espacio */
+  position: relative;
+}
+
+@media (max-width: 1120px) {
+
+  .login-card {
+    display: grid;
+    grid-template-columns: 0.8fr 1.1fr; /* El primer hijo ocupará el doble de espacio */
+    
+  }
+
+  .login-card .login-container{
+    margin-top: 80px;
   }
   
-  .login-form h2 {
+}
+
+@media (max-width: 900px) {
+.login-card {
+    display: grid;
+    grid-template-columns: 1/2fr; /* El primer hijo ocupará el doble de espacio */
+    width: 90%;
+    justify-content: center;
+  }
+
+  .login-card .login-container{
+    width:  100%;
+    margin: 40px 100px 0px 40px;
     text-align: center;
-    margin-bottom: 1.5rem;
   }
   
-  .form-group {
-    margin-bottom: 1rem;
+}
+
+@media (max-width: 650px) {
+
+  .login-card {
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+    width: 90%;
+    margin: 0px 0px 40px 50px;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .login-card .login-header{
+    height: 350px;
+  }
+
+
   }
   
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  input.invalid {
-    border-color: red;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[disabled] {
-    background-color: #999;
-    cursor: not-allowed;
-  }
-  
+
+
+}

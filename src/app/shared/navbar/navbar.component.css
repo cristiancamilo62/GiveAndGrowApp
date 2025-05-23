@@ -1,10 +1,11 @@
 /* ─── BARRA DE NAVEGACIÓN ───────────────────────── */
 .navbar {
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
+  background-color: white;
+  padding: 0px 40px;
+  padding-bottom: 20px;
   position: sticky;
   top: 0;
+  max-height: 300px;
   z-index: 1000;
 }
 
@@ -12,20 +13,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 90px;
 }
 
 .navbar-logo {
   font-size: 1.8rem;
-  color: white;
+  color: black;
   text-decoration: none;
   font-weight: bold;
 }
 
 .navbar-menu {
   list-style: none;
+  background-color: #0e743d;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  height: 40%;
+  border-radius: 30px;
   margin: 0;
-  padding: 0;
+  padding: 0 30px;
 }
 
 .navbar-item {
@@ -35,7 +43,7 @@
 .navbar-links {
   color: white;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 8px 16px;
   transition: background-color 0.3s;
 }
@@ -54,7 +62,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: white;
+  color:  #0e743d;
   padding: 8px;
   font-size: 1.4rem;
   transition: color 0.2s, background-color 0.2s;
@@ -112,8 +120,42 @@
 }
 
 /* ─── OPCIONAL: Responsive ───────────────────────── */
-@media (max-width: 600px) {
-  .navbar-menu {
-    display: none; /* podrías implementar un “hamburger” aquí */
+@media (max-width: 1000px) {
+
+  .navbar {
+    padding: 0px;
   }
+
+
+  /* Mostrar menú de usuario y logo de manera más compacta */
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+
+  .navbar-menu {
+    width: 45%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .navbar-item {
+    margin-right: 12px;
+  }
+  .navbar-links {
+    padding: 0px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 730px) {
+
+    .navbar-menu {
+    display: none; /* Menú oculto por defecto */
+    flex-direction: column;
+    width: 100%;
+    border-radius: 0;
+    padding: 10px 0;
+  }
+  }
+
+
 }

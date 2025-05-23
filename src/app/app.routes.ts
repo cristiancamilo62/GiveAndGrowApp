@@ -4,7 +4,7 @@ export const routes: Routes = [
 
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'login',
         pathMatch: 'full'
     },
 
@@ -26,6 +26,12 @@ export const routes: Routes = [
     {
         path: 'home',
         title: 'home',
-        loadComponent: () => import('./modules/components/principal-page/principal-page.component').then(m => m.PrincipalPageComponent)
+        loadComponent: () => import('./modules/components/home/home.component').then(m => m.HomeComponent)
+    }
+    ,
+    {
+        path: 'updateUser',
+        title: 'Actualizar',
+        loadComponent: () => import('./modules/components/user/form-update/form-update.component').then(m => m.FormUpdateComponent)
     }
 ];

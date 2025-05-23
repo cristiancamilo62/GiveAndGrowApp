@@ -1,5 +1,6 @@
 export interface User {
 
+    id?: string;
     identification: string;
     firstName: string;
     middleName?: string;

@@ -33,17 +33,13 @@ export class LoginComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
   });
-
-  // Signals para control de estado
-  readonly submitting = signal(false);
-  readonly formInvalid = computed(() => this.form.invalid && this.form.touched);
+;
 
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
 
-    this.submitting.set(true);
 
     const  credentials = this.form.getRawValue() as unknown as User;
 
@@ -51,14 +47,11 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: () => {
-        this.router.navigate(['/register']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         alert(err);
-      },
-      complete: () => {
-        this.submitting.set(false);
-      },
+      }
     });
   }
 }

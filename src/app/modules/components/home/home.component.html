@@ -1,0 +1,254 @@
+<app-navbar></app-navbar>
+
+<main class="home-container">
+
+  <!-- ─── CTA HEADER ─────────────────────────────────────────────────── -->
+  <section class="cta-header">
+    <div class="overlay"></div>
+    <div class="cta-content">
+      <h1>Haz la diferencia,<br>sé voluntario</h1>
+      <p>Únete a nuestra comunidad y participa en proyectos que cambian vidas.</p>
+      <div class="btn-group">
+        <button routerLink="/programs" class="cta-btn">Ver Programas</button>
+        <button *ngIf="(userRole$ | async) === 'ROLE_ORG'"
+                routerLink="/organization-dashboard"
+                class="cta-btn secondary">
+          Mi Panel
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT (Todos) ───────────────────────────────────────────────── -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="about-text">
+        <h2>¿Quiénes somos?</h2>
+        <p>
+          En Voluntarios.org conectamos organizaciones con personas comprometidas
+          a hacer del mundo un lugar mejor. Nuestra misión es facilitar
+          experiencias de voluntariado seguras, enriquecedoras y sostenibles.
+        </p>
+        <button routerLink="#about-section" class="learn-more">Saber más</button>
+      </div>
+      <div class="about-image">
+        <img src="https://plus.unsplash.com/premium_photo-1663117225393-91d3a9e13f60?auto=format&fit=crop&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1000"
+             alt="Voluntarios trabajando juntos">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── VOLUNTARIOS ─────────────────────────────────────────────────── -->
+  <ng-container *ngIf="(userRole$ | async) === 'ROLE_USER'">
+
+    <!-- Mis Inscripciones -->
+    <section class="card-section">
+      <h2>Mis Inscripciones</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Reforestación</h3>
+          <p>10 Sep 2025 · Parque Central</p>
+          <button class="btn-small">Ver Detalles</button>
+        </div>
+        <div class="card">
+          <h3>Comedor Comunitario</h3>
+          <p>15 Sep 2025 · Centro Comunitario</p>
+          <button class="btn-small">Ver Detalles</button>
+        </div>
+        <div class="card">
+          <h3>Reforestación</h3>
+          <p>10 Sep 2025 · Parque Central</p>
+          <button class="btn-small">Ver Detalles</button>
+        </div>
+        <div class="card">
+          <h3>Comedor Comunitario</h3>
+          <p>15 Sep 2025 · Centro Comunitario</p>
+          <button class="btn-small">Ver Detalles</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recomendados -->
+    <section class="card-section">
+      <h2>Recomendados para Ti</h2>
+      <div class="card-grid">
+        <div class="card hover-lift">
+          <img src="https://img.freepik.com/premium-photo/group-diverse-volunteers-cleaning-beaches-coastline-multiracial-students-work-pick-up-garbage-sand_164678-1569.jpg?w=2000" alt="Limpieza de playas" />
+          <h3>Limpieza de playas</h3>
+          <button class="btn-small">Me interesa</button>
+        </div>
+        <div class="card hover-lift">
+          <img src="https://plus.unsplash.com/premium_photo-1665203568927-bf0e58ee3d20?auto=format&blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&fit=crop&h=630&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMxOTU0NTk1fA&ixlib=rb-4.0.3&mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&q=60&w=1200" alt="Visita a asilos" />
+          <h3>Visita a asilos</h3>
+          <button class="btn-small">Me interesa</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendario Personal -->
+    <section class="calendar-section">
+      <h2>Mi Calendario, verificar si se coloca</h2>
+      <!-- Placeholder estático -->
+      <img src="https://via.placeholder.com/600x300?text=Calendario+Personal" alt="Calendario Personal" />
+    </section>
+
+    <!-- Logros y Badges -->
+    <section class="badge-section">
+      <h2>Mis Logros</h2>
+      <div class="badge-grid">
+        <div class="badge">10 Horas</div>
+        <div class="badge">5 Proyectos</div>
+        <div class="badge">Voluntario del Mes</div>
+      </div>
+    </section>
+
+    <!-- Perfil 
+    <section class="profile-section">
+      <h2>Mi Perfil</h2>
+      <form class="profile-form">
+        <label>Nombre completo
+          <input type="text" value="María López" />
+        </label>
+        <label>Email
+          <input type="email" value="maria.lopez@example.com" />
+        </label>
+        <button class="btn-small">Guardar cambios</button>
+      </form>
+    </section>
+
+     Testimonios 
+    <section class="testimonials-section">
+      <h2>Lo que dicen nuestros voluntarios</h2>
+      <div class="testimonial">
+        <p>"Ser voluntario me ha permitido conocerte personas increíbles."</p>
+        <cite>- Juan Pérez</cite>
+      </div>
+    </section>
+
+     Notificaciones 
+    <section class="notifications-section">
+      <h2>Notificaciones</h2>
+      <ul>
+        <li><strong>Recordatorio:</strong> Mañana empieza limpieza de playa.</li>
+        <li><strong>Nuevo mensaje:</strong> Revisa el foro para detalles.</li>
+      </ul>
+    </section>-->
+
+  </ng-container>
+
+  <!-- ─── ORGANIZACIONES ──────────────────────────────────────────────── -->
+  <ng-container *ngIf="(userRole$ | async) === 'ROLE_ORG'">
+
+    <!-- Dashboard / Gráficas -->
+    <section class="dashboard-section">
+      <h2>Dashboard</h2>
+      <div class="chart-grid">
+        <img src="https://via.placeholder.com/400x300?text=Voluntarios+por+Programa" alt="Gráfica Voluntarios por Programa" />
+        <img src="https://via.placeholder.com/400x300?text=Horas+Registradas" alt="Gráfica Horas Registradas" />
+      </div>
+    </section>
+
+    <!-- Gestionar Programas y Eventos -->
+    <section class="card-section">
+      <h2>Mis Programas</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Reciclaje Comunitario</h3>
+          <div class="card-actions">
+            <button class="btn-small">Editar</button>
+            <button class="btn-small danger">Eliminar</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Ayuda en Refugios</h3>
+          <div class="card-actions">
+            <button class="btn-small">Editar</button>
+            <button class="btn-small danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+      <button routerLink="/create-program" class="cta-btn">Crear Programa</button>
+    </section>
+
+    <!-- Gestionar Voluntarios -->
+    <section class="table-section">
+      <h2>Voluntarios Inscritos</h2>
+      <table>
+        <thead>
+          <tr><th>Nombre</th><th>Programa</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ana Gómez</td>
+            <td>Reciclaje Comunitario</td>
+            <td>
+              <button class="btn-small">Confirmar</button>
+              <button class="btn-small">Recordatorio</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Carlos Ruiz</td>
+            <td>Ayuda en Refugios</td>
+            <td>
+              <button class="btn-small">Confirmar</button>
+              <button class="btn-small">Recordatorio</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Mensajería Interna -->
+    <section class="messaging-section">
+      <h2>Mensajes</h2>
+      <div class="chat-window">
+        <div class="message from-org"><strong>Org Admin:</strong> No olviden el informe mensual.</div>
+        <div class="message from-me"><strong>Tú:</strong> Informe enviado ayer.</div>
+      </div>
+      <input type="text" placeholder="Escribe un mensaje..." disabled />
+    </section>
+
+    <!-- Reportes y Exportación -->
+    <section class="card-section">
+      <h2>Reportes</h2>
+      <button class="btn-small">Exportar CSV</button>
+      <button class="btn-small">Generar PDF</button>
+    </section>
+
+    <!-- Configuración y Equipo -->
+    <section class="tabs-section">
+      <h2>Configuración</h2>
+      <ul class="tab-list">
+        <li class="tab active">Organización</li>
+        <li class="tab">Equipo</li>
+      </ul>
+      <div class="tab-content">
+        <!-- Configuración Org -->
+        <div class="tab-pane active">
+          <form class="profile-form">
+            <label>Nombre
+              <input type="text" value="Fundación Amigos" />
+            </label>
+            <label>Dirección
+              <input type="text" value="Calle 123 #45-67, Ciudad" />
+            </label>
+            <button class="btn-small">Guardar</button>
+          </form>
+        </div>
+        <!-- Equipo -->
+        <div class="tab-pane">
+          <ul class="list-placeholder">
+            <li>Juan Pérez — Administrador</li>
+            <li>Ana Gómez — Coordinadora</li>
+          </ul>
+          <button routerLink="/invite-member" class="btn-small">Invitar Nuevo</button>
+        </div>
+      </div>
+    </section>
+
+  </ng-container>
+
+</main>
+
+<app-footer></app-footer>

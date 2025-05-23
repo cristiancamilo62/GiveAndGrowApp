@@ -1,0 +1,139 @@
+<section class="wrapper">
+    <!-- panel ilustrado (solo desktop) -->
+    <aside class="art"></aside>
+  
+    <!-- CARD CONTENEDORA -->
+    <form
+      class="card"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <h1 class="title">CREATE ACCOUNT</h1>
+
+  <!-- ─── IDENTIFICACIÓN ───────────────────────────── -->
+  <label class="field">
+    <span>Cédula / Identificación *</span>
+    <input
+      type="text"
+      formControlName="identification"
+      placeholder="1234567890"
+    />
+    <small
+      class="error"
+      *ngIf="control('identification').errors && (control('identification').dirty || control('identification').touched)"
+    >
+      <ng-container *ngIf="control('identification').errors?.['required']">
+        Requerido.
+      </ng-container>
+      <ng-container *ngIf="control('identification').errors?.['minlength'] || control('identification').errors?.['maxlength']">
+        7 – 15 números.
+      </ng-container>
+    </small>
+  </label>
+
+  <!-- ─── NOMBRES Y APELLIDOS ──────────────────────── -->
+  <div class="grid-2">
+    <label class="field">
+      <span>Primer nombre *</span>
+      <input type="text" formControlName="firstName" />
+      <small
+        class="error"
+        *ngIf="control('firstName').errors && (control('firstName').dirty || control('firstName').touched)"
+      >
+        <ng-container *ngIf="control('firstName').errors?.['required']">
+          Requerido.
+        </ng-container>
+        <ng-container *ngIf="control('firstName').errors?.['minlength'] || control('firstName').errors?.['maxlength']">
+          3 – 20 caracteres.
+        </ng-container>
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Segundo nombre</span>
+      <input type="text" formControlName="middleName" />
+    </label>
+
+    <label class="field">
+      <span>Primer apellido *</span>
+      <input type="text" formControlName="lastName" />
+      <small
+        class="error"
+        *ngIf="control('lastName').errors && (control('lastName').dirty || control('lastName').touched)"
+      >
+        <ng-container *ngIf="control('lastName').errors?.['required']">
+          Requerido.
+        </ng-container>
+        <ng-container *ngIf="control('lastName').errors?.['minlength'] || control('lastName').errors?.['maxlength']">
+          3 – 20 caracteres.
+        </ng-container>
+      </small>
+    </label>
+
+    <label class="field">
+      <span>Segundo apellido</span>
+      <input type="text" formControlName="middleLastName" />
+    </label>
+  </div>
+
+  <!-- ─── EMAIL ────────────────────────────────────── -->
+  <div class="grid-2">
+    <label class="field">
+    <span>Correo electrónico *</span>
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="usuario@correo.com"
+    />
+    <small
+      class="error"
+      *ngIf="control('email').errors && (control('email').dirty || control('email').touched)"
+    >
+      <ng-container *ngIf="control('email').errors?.['required']">
+        Requerido.
+      </ng-container>
+      <ng-container *ngIf="control('email').errors?.['email']">
+        Formato inválido.
+      </ng-container>
+    </small>
+  </label>
+
+  <!-- ─── TELÉFONO ─────────────────────────────────── -->
+  <label class="field">
+    <span>Teléfono / Celular *</span>
+    <input
+      type="tel"
+      formControlName="phoneNumber"
+      placeholder="3001234567"
+    />
+    <small
+      class="error"
+      *ngIf="control('phoneNumber').errors && (control('phoneNumber').dirty || control('phoneNumber').touched)"
+    >
+      <ng-container *ngIf="control('phoneNumber').errors?.['required']">
+        Requerido.
+      </ng-container>
+      <ng-container *ngIf="control('phoneNumber').errors?.['pattern']">
+        Debe contener 7 – 15 dígitos.
+      </ng-container>
+    </small>
+  </label>
+  </div>
+
+  <p class="error center" *ngIf="error()">{{ error() }}</p>
+
+    <!-- SUBMIT -->
+    <button class="btn" type="submit">
+      <span *ngIf="!loading()">Guardar usuario</span>
+      <span *ngIf="loading()">Procesando…</span>
+    </button>
+
+    <p class="center">
+      ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
+  </form>
+
+  <div class="white">
+  </div>
+
+</section>

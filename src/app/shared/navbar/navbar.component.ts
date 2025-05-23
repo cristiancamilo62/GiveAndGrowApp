@@ -1,30 +1,39 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  imports: [RouterLink,ReactiveFormsModule,CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
 
-  // Utilizamos señales para manejar el estado (si el usuario está logueado, por ejemplo)
-  isLoggedIn = signal<boolean>(false); // Signal para estado de sesión
+  isAuthenticated : boolean; // Estado de autenticación
 
-  constructor() { }
+  private authService = inject(AuthService); // Inyectar el servicio de autenticación
 
-  ngOnInit(): void {
-    // Aquí podríamos verificar el estado de sesión si es necesario
-    // Ejemplo: this.isLoggedIn.set(true); o false si no está logueado
+  constructor() {
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
-  // Método para alternar el estado de sesión (solo un ejemplo)
-  toggleLogin() {
-    this.isLoggedIn.set(!this.isLoggedIn());
+  ngOnInit(): void {}
+
+  logout(): void {
+    this.authService.logout();
+
+
+  }
+
   }
 
 
 
 
-}
+
+
+
+
