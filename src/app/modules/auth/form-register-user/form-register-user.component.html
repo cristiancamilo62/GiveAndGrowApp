@@ -1,21 +1,45 @@
+    <div class="logo-container">
+    <img class="logo" src="https://th.bing.com/th/id/OIP.VU78rXLHAni6J7dwwYqjBgHaHa?cb=iwc2&rs=1&pid=ImgDetMain" alt="logo">
+    <a routerLink='/home'>
+      <svg class="icon-home" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+  </a>
+
+  </div>
+
 <section class="wrapper">
-    <!-- panel ilustrado (solo desktop) -->
-    <aside class="art"></aside>
   
-    <!-- CARD CONTENEDORA -->
+  <!-- Ilustración de fondo (solo desktop) -->
+  <aside class="art"></aside>
+
+
+  <div class="card-box">
+    <!-- Panel blanco con mensaje -->
+    <article class="info">
+      <div class="text">
+        <h2>Registro de <br>Voluntariados</h2>
+        <p>
+          ¡Si estás listo para poner tu talento al servicio de los demás,
+          regístrate y haz parte del cambio!
+        <strong class="line">_____________</strong></p>
+      </div>
+    </article>
+
+    <!-- ======== TU FORMULARIO TAL CUAL ========== -->
     <form
       class="card"
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
       novalidate
     >
-      <h1 class="title">CREATE ACCOUNT</h1>
-
   <!-- ─── IDENTIFICACIÓN ───────────────────────────── -->
   <label class="field">
     <span>Cédula / Identificación *</span>
     <input
       type="text"
+      id="only"
       formControlName="identification"
       placeholder="1234567890"
     />
@@ -78,6 +102,7 @@
   </div>
 
   <!-- ─── EMAIL ────────────────────────────────────── -->
+   <div class="grid-2">
   <label class="field">
     <span>Correo electrónico *</span>
     <input
@@ -98,7 +123,27 @@
     </small>
   </label>
 
+  
+  <!-- ─── CONTRASEÑA ───────────────────────────────── -->
+  <label class="field">
+    <span>Contraseña *</span>
+    <input type="password" formControlName="password" />
+    <small
+      class="error"
+      *ngIf="control('password').errors && (control('password').dirty || control('password').touched)"
+    >
+      <ng-container *ngIf="control('password').errors?.['required']">
+        Requerido.
+      </ng-container>
+      <ng-container *ngIf="control('password').errors?.['minlength']">
+        Mínimo 8 caracteres.
+      </ng-container>
+    </small>
+  </label>
+   </div>
+
   <!-- ─── TELÉFONO ─────────────────────────────────── -->
+   <div class="grid-2">
   <label class="field">
     <span>Teléfono / Celular *</span>
     <input
@@ -119,36 +164,27 @@
     </small>
   </label>
 
-  <!-- ─── CONTRASEÑA ───────────────────────────────── -->
-  <label class="field">
-    <span>Contraseña *</span>
-    <input type="password" formControlName="password" />
-    <small
-      class="error"
-      *ngIf="control('password').errors && (control('password').dirty || control('password').touched)"
-    >
-      <ng-container *ngIf="control('password').errors?.['required']">
-        Requerido.
-      </ng-container>
-      <ng-container *ngIf="control('password').errors?.['minlength']">
-        Mínimo 8 caracteres.
-      </ng-container>
-    </small>
-  </label>
+  <button class="btn" type="submit" [disabled]="!form.valid || loading()">
+        <span *ngIf="!loading()">REGISTRAR</span>
+        <span *ngIf="loading()">Procesando…</span>
+      </button>
 
-  <p class="error center" *ngIf="error()">{{ error() }}</p>
 
-    <!-- SUBMIT -->
-    <button class="btn" type="submit" [disabled]="!form.valid || loading()">
-      <span *ngIf="!loading()">Guardar usuario</span>
-      <span *ngIf="loading()">Procesando…</span>
-    </button>
-
-    <p class="center">
-      ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
-  </form>
-
-  <div class="white">
   </div>
 
+
+  <!--<p class="error center" *ngIf="error()">{{ error() }}</p>-->
+
+      
+      <p class="center">
+        ¿Ya tienes cuenta?
+        <a routerLink="/login">Iniciar sesión</a>
+      </p>
+    </form>
+  </div>
 </section>
+
+
+
+
+

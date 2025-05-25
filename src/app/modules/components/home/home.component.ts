@@ -16,9 +16,11 @@ import { FooterComponent } from "../../../shared/footer/footer.component";
   styleUrl: './home.component.css'
 })
 export class HomeComponent  implements OnInit{
+onSubmit() {
+throw new Error('Method not implemented.');
+}
 
   userRole$: Observable<string | null>;
-
   constructor(private authService: AuthService) {
     this.userRole$ = this.authService.userRole$;
   }

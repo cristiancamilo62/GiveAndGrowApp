@@ -1,13 +1,42 @@
-    <!-- FORMULARIO DE ORGANIZACIÓN -->
+       <div class="logo-container">
+    <img class="logo" src="https://th.bing.com/th/id/OIP.VU78rXLHAni6J7dwwYqjBgHaHa?cb=iwc2&rs=1&pid=ImgDetMain" alt="logo">
+    <a routerLink='/home'>
+      <svg class="icon-home" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+  </a>
+
+  </div>
+
+  <section class="wrapper">
+  
+  <!-- Ilustración de fondo (solo desktop) -->
+  <aside class="art"></aside>
+
+
+  <div class="card-box">
+    <!-- Panel blanco con mensaje -->
+    <article class="info">
+      <div class="text">
+        <h2>Registro de <br>Organizaciones</h2>
+        <p>
+          Si tu organización está abierta a sumar talento joven,
+           comprometido y con ganas de aportar, ¡este espacio es para ti!
+        <strong class="line">_____________</strong></p>
+      </div>
+    </article>
+   
+   <!-- FORMULARIO DE ORGANIZACIÓN -->
     <form
       class="card"
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
       novalidate
     >
-      <h1 class="title">REGISTRAR ORGANIZACIÓN</h1>
   
       <!-- ─── NOMBRE ─────────────────────────────────────── -->
+      <div class="grid-2">
       <label class="field">
         <span>Nombre de la organización *</span>
         <input
@@ -20,6 +49,28 @@
           <ng-container *ngIf="control('name').errors?.['minlength']">Mínimo 3 caracteres.</ng-container>
         </small>
       </label>
+
+      <label class="field">
+        <span>Cédula / Identificación *</span>
+        <input
+          type="text"
+          formControlName="identification"
+          placeholder="1234567890"
+        />
+        <small
+          class="error"
+          *ngIf="control('identification').errors && (control('identification').dirty || control('identification').touched)"
+        >
+          <ng-container *ngIf="control('identification').errors?.['required']">
+            Requerido.
+          </ng-container>
+          <ng-container *ngIf="control('identification').errors?.['minlength'] || control('identification').errors?.['maxlength']">
+            7 – 15 números.
+          </ng-container>
+        </small>
+      </label>
+
+      </div>
   
       <!-- ─── DESCRIPCIÓN ───────────────────────────────── -->
       <label class="field">
@@ -34,6 +85,7 @@
       </label>
   
       <!-- ─── TELÉFONO ─────────────────────────────────── -->
+       <div class="grid-2">
       <label class="field">
         <span>Número de contacto *</span>
         <input
@@ -46,8 +98,24 @@
           <ng-container *ngIf="control('contactNumber').errors?.['pattern']">Debe tener 7–15 dígitos.</ng-container>
         </small>
       </label>
+
+      <!-- ─── DIRECCIÓN ────────────────────────────────── -->
+      <label class="field">
+        <span>Dirección física *</span>
+        <input
+          type="text"
+          formControlName="address"
+          placeholder="Calle 123 #45-67, Ciudad"
+        />
+        <small class="error" *ngIf="control('address').invalid && control('address').touched">
+          Requerido.
+        </small>
+      </label>
+
+      </div>
   
       <!-- ─── EMAIL ────────────────────────────────────── -->
+       <div class="grid-2">
       <label class="field">
         <span>Correo electrónico *</span>
         <input
@@ -71,18 +139,7 @@
         </small>
       </label>
   
-      <!-- ─── DIRECCIÓN ────────────────────────────────── -->
-      <label class="field">
-        <span>Dirección física *</span>
-        <input
-          type="text"
-          formControlName="address"
-          placeholder="Calle 123 #45-67, Ciudad"
-        />
-        <small class="error" *ngIf="control('address').invalid && control('address').touched">
-          Requerido.
-        </small>
-      </label>
+      </div>
   
       <!-- ─── ERRORES Y BOTÓN ──────────────────────────── -->
       <p class="error center" *ngIf="error()">{{ error() }}</p>
@@ -96,5 +153,9 @@
         ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
       </p>
     </form>
-  
-    <div class="white"></div>
+</div>
+</section>
+
+
+
+

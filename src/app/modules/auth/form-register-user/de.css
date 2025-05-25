@@ -1,0 +1,168 @@
+/* ─── Paleta ────────────────────────────── */
+:root {
+  --green: #005e35;     /* fondo del form */
+  --accent: #d5e42f;    /* botón */
+  --bg:     #e6f3ec;    /* fondo general */
+}
+
+
+/* ─── Wrapper general ───────────────────── */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ola ilustrada (solo desktop) */
+.art {
+  flex: 1 0 35%;
+  background: url("/assets/wave-bg.svg") bottom left / contain no-repeat;
+  display: block;
+}
+@media (max-width: 768px) {
+  .art {
+    display: none;
+  }
+}
+
+/* ─── Card compuesto (info + form) ──────── */
+.card-box {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  max-width: 960px;
+  background-color: red;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0 0 0 / .1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Panel blanco de información */
+.info {
+  background: blue;
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+.info::before {               /* línea verde vertical */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--green);
+}
+.info h2 {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+.info p {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Formulario verde */
+.card {
+  background: var(--green);
+  color: #fff;
+  padding: 2.5rem 2rem;
+  display: grid;
+  gap: 1.2rem;
+  position: relative;
+}
+/* “Punta” que sobresale hacia la izquierda */
+.card::before {
+  content: "";
+  position: absolute;
+  left: -20px;                /* ancho del triángulo */
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 20px;
+  height: 20px;
+  background: var(--green);
+}
+
+/* Campos y etiquetas */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+}
+.field span {
+  color: #d6f3e3;             /* etiqueta en verde claro */
+}
+.field input {
+  padding: 0.55rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+}
+.field input::placeholder {
+  color: #7fb598;
+}
+.field input:focus {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Grilla 2 × 2 para nombres / apellidos */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Mensajes de error */
+.error {
+  color: #ffbaba;
+  font-size: 0.75rem;
+}
+
+/* Botón */
+.btn {
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Centrados utilitarios */
+.center {
+  text-align: center;
+}
+
+/* ─── Responsive: stack en móvil ────────── */
+@media (max-width: 768px) {
+  .card-box {
+    grid-template-columns: 1fr;
+  }
+  .info::before {             /* sin línea verde en móvil */
+    display: none;
+  }
+  .card {
+    order: 1;                 /* Se muestra primero el form */
+  }
+  .info {
+    order: 2;
+  }
+}
