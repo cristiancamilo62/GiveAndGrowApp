@@ -1,0 +1,139 @@
+<app-navbar></app-navbar>
+
+  <section class="wrapper">
+  
+  <!-- Ilustración de fondo (solo desktop) -->
+  <aside class="art"></aside>
+
+  <div class="card-box">
+    <!-- Panel blanco con mensaje -->
+    <article class="info">
+      <div class="text">
+        <h2>¿Algo cambió?</h2>
+        <p>
+          Mantén tu perfil al día y facilita que más voluntarios encuentren y se sumen a tu misión.
+        <strong class="line">_____________</strong></p>
+      </div>
+    </article>
+   
+   <!-- FORMULARIO DE ORGANIZACIÓN -->
+    <form
+      class="card"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+  
+      <!-- ─── NOMBRE ─────────────────────────────────────── -->
+      <div class="grid-2">
+      <label class="field">
+        <span>Nombre de la organización *</span>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Ej. Fundación Amigos del Futuro"
+        />
+        <small class="error" *ngIf="control('name').invalid && control('name').touched">
+          <ng-container *ngIf="control('name').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('name').errors?.['minlength']">Mínimo 3 caracteres.</ng-container>
+        </small>
+      </label>
+
+      <label class="field">
+        <span>NIT *</span>
+        <input
+          type="text"
+          formControlName="nit"
+          placeholder="1234567890"
+        />
+        <small
+          class="error"
+          *ngIf="control('nit').errors && (control('nit').dirty || control('nit').touched)"
+        >
+          <ng-container *ngIf="control('nit').errors?.['required']">
+            Requerido.
+          </ng-container>
+          <ng-container *ngIf="control('nit').errors?.['minlength'] || control('nit').errors?.['maxlength']">
+            7 – 15 números.
+          </ng-container>
+        </small>
+      </label>
+
+      </div>
+  
+      <!-- ─── DESCRIPCIÓN ───────────────────────────────── -->
+      <label class="field">
+        <span>Descripción *</span>
+        <textarea
+          formControlName="description"
+          placeholder="Cuéntanos qué hace tu organización"
+        ></textarea>
+        <small class="error" *ngIf="control('description').invalid && control('description').touched">
+          Requerido.
+        </small>
+      </label>
+  
+      <!-- ─── TELÉFONO ─────────────────────────────────── -->
+       <div class="grid-2">
+      <label class="field">
+        <span>Número de contacto *</span>
+        <input
+          type="tel"
+          formControlName="contactNumber"
+          placeholder="3001234567"
+        />
+        <small class="error" *ngIf="control('contactNumber').invalid && control('contactNumber').touched">
+          <ng-container *ngIf="control('contactNumber').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('contactNumber').errors?.['pattern']">Debe tener 7–15 dígitos.</ng-container>
+        </small>
+      </label>
+
+      <!-- ─── DIRECCIÓN ────────────────────────────────── -->
+      <label class="field">
+        <span>Dirección física *</span>
+        <input
+          type="text"
+          formControlName="address"
+          placeholder="Calle 123 #45-67, Ciudad"
+        />
+        <small class="error" *ngIf="control('address').invalid && control('address').touched">
+          Requerido.
+        </small>
+      </label>
+
+      </div>
+  
+      <!-- ─── EMAIL ────────────────────────────────────── -->
+       <div class="grid-2">
+      <label class="field">
+        <span>Correo electrónico *</span>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="org@ejemplo.com"
+        />
+        <small class="error" *ngIf="control('email').invalid && control('email').touched">
+          <ng-container *ngIf="control('email').errors?.['required']">Requerido.</ng-container>
+          <ng-container *ngIf="control('email').errors?.['email']">Formato inválido.</ng-container>
+        </small>
+      </label>
+      <div class="btn-update">
+        <button class="btn" type="submit" [disabled]="!form.valid || loading()">
+            <span *ngIf="!loading()">ACTUALIZAR</span>
+        </button>
+      </div>
+  
+      </div>
+  
+      
+  <!-- ─── ERRORES Y BOTÓN    <p class="error center" *ngIf="error()">{{ error() }}</p>-->
+  
+      
+  
+    </form>
+</div>
+</section>
+
+
+
+

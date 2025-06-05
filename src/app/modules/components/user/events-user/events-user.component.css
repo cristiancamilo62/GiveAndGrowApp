@@ -1,0 +1,204 @@
+.events-create-wrapper{
+    margin: 0 auto;
+    max-width: 1200px;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Estilo para el contenedor del select */
+.search-bar {
+  position: relative; /* Asegura que el icono se posicione correctamente */
+  display: flex;
+  justify-content: start; /* Centra el contenido dentro del contenedor */
+  margin: 20px 0;
+  width: fit-content;
+  margin-right: 20px;
+}
+
+
+
+.search-bar select {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: fit-content;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  appearance: none; /* Elimina el estilo predeterminado en algunos navegadores */
+  -webkit-appearance: none; /* Para Safari */
+  -moz-appearance: none; /* Para Firefox */
+  width: fit-content; /* Ocupa el 100% del contenedor para mayor flexibilidad */
+  max-width: 800px; /* Ajusta el tamaño según el diseño */
+  transition: all 0.3s ease-in-out;
+  text-align: left; /* Asegura que el texto dentro del select esté alineado a la izquierda */
+}
+
+.search-bar .category{
+    margin-left: 10px;
+    width: fit-content;
+    border: #e1e1e1;
+}
+.search-bar .location{
+    margin-left: 10px;
+    width: fit-content;
+    border: #e1e1e1;
+}
+
+/* Estilo para el campo de texto de búsqueda */
+.search-bar input {
+  width: fit-content;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.events-title{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    background-color: #fff;
+}
+
+.cards-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+    gap: 35px;
+
+}
+
+.event-card{
+    background-color: #fff;
+    border-radius: 20px;
+    height: 100%;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.event-card .card-image{
+    width: 30%;
+    object-fit: cover;
+    border-radius: 8px;
+
+}
+.card-content{
+    padding: 0 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+}
+
+.event-name{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.event-name h3{
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    color: var(--color-principal);
+    padding-bottom: 3px;
+
+}
+.grid-2{
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 15px 0;
+}
+.grid-2 .rows{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #e1e1e1;
+    width: 100%;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+#voluntes{
+    background-color: #e1e1e1;
+    border-radius: 10px;
+    height: 100%;
+    margin-left: 4px;
+}
+
+.separador{
+    border-right: 2px solid #727070; /* la línea vertical en el centro */
+}
+.grid-2 .row{
+    display: flex;
+    flex-direction: column;
+    padding: 0 6px;
+}
+.grid-2 .row .label-volunter{
+    display: flex;
+    flex-direction: row;
+
+}
+.label-volunter svg{
+    margin-right: 8px;
+    fill: var(--color-principal);  
+}
+
+.row .label{
+     color : #727070
+}
+
+.row .value {
+    color: var(--color-principal);
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  background-color: #e1e1e1;
+  padding: 15px;
+  margin:  10px 20px 0 10px;
+  border-radius: 12px;
+  color: #444;
+}
+
+.description .label {
+  color: #727070;
+}
+
+.description .value{
+    color: var(--color-principal);
+}
+
+
+.buttons-row{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 10px 20px 10px 0;
+}
+
+.buttons-row button{
+    background-color: var(--color-principal);
+    color: #fff;
+    border-radius: 20px;
+    width: 100px;
+    height: 25px;
+    border: none;
+}
+
+.buttons-row button:hover{
+   background-color: var(--color-principal-hover);
+   cursor: pointer;
+}
+
+

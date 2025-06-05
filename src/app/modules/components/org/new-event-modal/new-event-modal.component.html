@@ -1,0 +1,84 @@
+<div class="modal-overlay">
+  <div class="border">
+    <div class="modal-container" (click)="$event.stopPropagation()" [formGroup]="eventForm">
+
+      <!-- Header -->
+      <div class="modal-header">
+        <div class="header">
+          <label class="titulo">Nombre:</label>
+          <button type="button" class="btn-cerrar" (click)="close()">✕</button>
+        </div>
+        <input type="text" placeholder="Nombre del evento" formControlName="name" />
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="col-izq">
+          <span class="icono-imagen">📷</span>
+          <span class="info">cargar imagen</span>
+        </div>
+
+        <div class="col-der">
+          <div class="grid-2">
+            <div class="fila">
+              <label for="address">Dirección:</label>
+              <input type="text" formControlName="address" placeholder="Dirección" />
+            </div>
+            <div class="fila">
+              <label>Ciudad:</label>
+              <input type="text" formControlName="location" placeholder="Ciudad" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="fila">
+              <label>Fecha Inicio:</label>
+              <input type="date" formControlName="startDateTime" />
+            </div>
+            <div class="fila">
+              <label>Fecha Límite Postulación:</label>
+              <input type="date" formControlName="registrationDeadline" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="fila">
+              <label>Categoría:</label>
+              <select formControlName="category">
+                <option value="">Seleccione una categoría</option>
+                <option value="AMBIENTAL">Ambiental</option>
+                <option value="COMUNITARIA">Comunitaria</option>
+                <option value="ACADÉMICA">Académica</option>
+              </select>
+            </div>
+
+            <div class="fila">
+              <label>Cantidad Voluntarios:</label>
+              <input type="number" formControlName="maxParticipants" placeholder="0" />
+            </div>
+          </div>
+
+          <div class="fila fila-descripcion">
+            <label>Descripción:</label>
+            <textarea
+              formControlName="description"
+              rows="2"
+              placeholder="Descripción"
+              maxlength="110"
+              (input)="actualizarCaracteres($event)">
+            </textarea>
+            <span>Caracteres restantes: {{ caracteresRestantes }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn-publicar" (click)="submit()">
+          {{ isEditMode ? 'ACTUALIZAR' : 'PUBLICAR' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

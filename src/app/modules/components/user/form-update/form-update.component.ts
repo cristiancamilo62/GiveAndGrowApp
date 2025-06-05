@@ -4,12 +4,13 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../../core/models/user';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { NavbarComponent } from "../../../../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-form-update',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],  // Asegúrate de importar los módulos necesarios
+  imports: [ReactiveFormsModule, CommonModule, NavbarComponent],  // Asegúrate de importar los módulos necesarios
   templateUrl: './form-update.component.html',
   styleUrls: ['./form-update.component.css']
 })
@@ -19,6 +20,7 @@ export class FormUpdateComponent implements OnInit {
   private authService = inject(AuthService);  // Usamos la señal de usuario desde el servicio
   private userService = inject(UserService);  // Inyectar el servicio de usuario
   private fb = inject(FormBuilder);  // Usamos FormBuilder para crear el formulario
+  private route = inject(Router)
 
   // Definir las señales de estado (loading, error)
   readonly loading: WritableSignal<boolean> = signal(false);
@@ -46,6 +48,8 @@ export class FormUpdateComponent implements OnInit {
         lastName: [this.user.lastName || '', Validators.required],
         middleLastName: [this.user.middleLastName || ''],
         email: [this.user.email || '', [Validators.required, Validators.email]],
+        institution: [this.user.institution || "",[Validators.required]],
+        phoneOfReference: [this.user.phoneOfReference || "" , [Validators.required]],
         phoneNumber: [this.user.phoneNumber || '', Validators.required],
         password: ['' ]  // Puedes aplicar más validaciones si es necesario
       });
@@ -67,10 +71,13 @@ export class FormUpdateComponent implements OnInit {
       console.log(updatedUser);
       this.userService.updateUser(updatedUser).subscribe(
         (response) => {
-          console.log('Usuario actualizado con éxito', response);
+          alert(response)
+          this.authService.updateUserData(updatedUser);
+          this.route.navigate(["/home"]);
         },
         (error) => {
           this.error.set('Error al actualizar el usuario');
+          console.log(error);
         }
       );
     }

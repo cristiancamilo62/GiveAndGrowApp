@@ -1,0 +1,127 @@
+<app-navbar></app-navbar>
+
+<div class="events-create-wrapper">
+
+    <!-- Barra de búsqueda -->
+  
+
+  <!-- Título general -->
+  <h2 class="events-title">EVENTOS</h2>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-bar">
+    <!-- Selector para elegir el tipo de filtro -->
+    <select class="options" [(ngModel)]="searchType" (change)="onFilterChange()">
+      <option value="all">Filtrar por: Todo</option>
+      <option value="category">Categoría</option>
+      <option value="location">Localidad</option>
+    </select>
+
+    <!-- Si se elige "Categoría", muestra un desplegable con las opciones -->
+    <div class="category" *ngIf="searchType === 'category'">
+      <select [(ngModel)]="selectedCategory" (change)="onSearch()">
+        <option value="">Selecciona una categoría</option>
+        <option value="Comunitaria">Comunitaria</option>
+        <option value="academica">Academica</option>
+        <option value="Ambiental">Ambiental</option>
+      </select>
+    </div>
+
+    <!-- Si se elige "Localidad", muestra un campo de texto -->
+    <div class="location" *ngIf="searchType === 'location'">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        placeholder="Ingresa la localidad" 
+        (input)="onSearch()"  
+      />
+    </div>
+  </div>
+
+  <!-- Contenedor de cards -->
+  <div class="cards-container">
+    <div
+      class="event-card"
+      *ngFor="let ev of filteredEvents; index as i"
+      [attr.data-index]="i"
+    >
+      <!-- Imagen del evento -->
+    <div class="top-row">   
+      <img class="card-image" src="/home_1.jpg" alt="{{ ev.name }}" />
+
+      <!-- Contenido principal de la tarjeta -->
+      <div class="card-content">
+        <!-- Título del evento -->
+        <div class="event-name">
+          <h3>{{ ev.name }}</h3>
+        </div>
+
+        <!-- Dirección, ciudad, vacantes -->
+        <div class="grid-2">
+          <div class="rows">
+            <div class="row">
+              <span class="label">Dirección:</span>
+              <span class="value">{{ev.address}}</span>
+            </div>
+            <div class="row">
+              <span class="label">Ciudad · Municipio:</span>
+              <span class="value">{{ ev.location }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Vacantes</span>
+              <div class="label-volunter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     viewBox="0 0 24 24">
+                  <path d="M12 12c2.7 0 4.8-2.2 4.8-4.8S14.7 2.4 12 2.4 7.2 4.6 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+                <span class="value">{{ ev.maxParticipants - ev.currentParticipantsCount }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fechas y categoría -->
+        <div class="grid-2">
+          <div class="rows">
+            <div class="row">
+              <span class="label">Fecha inicio</span>
+              <span class="value">
+                {{ ev.startDateTime | date: 'EEEE dd MMM' }}
+              </span>
+            </div>
+            <div class="separador"></div>
+            <div class="row">
+              <span class="label">Fecha límite</span>
+              <span class="value">
+                {{ ev.registrationDeadline | date: 'EEEE dd MMM' }}
+              </span>
+            </div>
+            <div class="row" id="voluntes">
+              <span class="label">Categoría</span>
+              <span class="value">{{ ev.category | uppercase }}</span>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        
+      </div>
+
+      <!-- ✅ Descripción al final, fuera de .card-content -->
+      <div class="description">
+        <span class="label">Descripción:</span>
+        <span class="value">{{ ev.description }}</span>
+      </div>
+      <!-- Botones -->
+        <div class="buttons-row">
+          <button (click)="onApply(ev.id)" class="btn-edit">APLICAR</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Si no hay eventos -->
+  <div *ngIf="!filteredEvents || filteredEvents.length === 0" class="no-events">
+    <p>No hay eventos disponibles.</p>
+  </div>    
+
+</div>

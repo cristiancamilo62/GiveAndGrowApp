@@ -7,6 +7,8 @@ export interface User {
     lastName: string;
     middleLastName?: string;
     email: string;
+    institution: string;
+    phoneOfReference: string;
     phoneNumber: string;
     password: string;
 }

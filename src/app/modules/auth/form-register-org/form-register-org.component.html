@@ -1,13 +1,4 @@
-       <div class="logo-container">
-    <img class="logo" src="https://th.bing.com/th/id/OIP.VU78rXLHAni6J7dwwYqjBgHaHa?cb=iwc2&rs=1&pid=ImgDetMain" alt="logo">
-    <a routerLink='/home'>
-      <svg class="icon-home" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
-        <path d="M0 0h24v24H0z" fill="none"/>
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-      </svg>
-  </a>
-
-  </div>
+<app-navbar></app-navbar>
 
   <section class="wrapper">
   
@@ -51,20 +42,20 @@
       </label>
 
       <label class="field">
-        <span>Cédula / Identificación *</span>
+        <span>NIT *</span>
         <input
           type="text"
-          formControlName="identification"
+          formControlName="nit"
           placeholder="1234567890"
         />
         <small
           class="error"
-          *ngIf="control('identification').errors && (control('identification').dirty || control('identification').touched)"
+          *ngIf="control('nit').errors && (control('nit').dirty || control('nit').touched)"
         >
-          <ng-container *ngIf="control('identification').errors?.['required']">
+          <ng-container *ngIf="control('nit').errors?.['required']">
             Requerido.
           </ng-container>
-          <ng-container *ngIf="control('identification').errors?.['minlength'] || control('identification').errors?.['maxlength']">
+          <ng-container *ngIf="control('nit').errors?.['minlength'] || control('nit').errors?.['maxlength']">
             7 – 15 números.
           </ng-container>
         </small>

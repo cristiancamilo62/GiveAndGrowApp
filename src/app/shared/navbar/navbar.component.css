@@ -3,17 +3,25 @@
   background-color: white;
   padding: 0px 40px;
   padding-bottom: 20px;
+  margin-bottom: 30px;
   position: sticky;
   top: 0;
   max-height: 300px;
-  z-index: 1000;
+  box-shadow: 0 7px 6px rgba(0,0,0,0.2);
+  z-index: 1000;  
 }
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
   height: 90px;
+}
+
+.navbar-container img{
+  width: 190px;
+  height: 120px;
+  padding-left: 30px;
 }
 
 .navbar-logo {
@@ -25,12 +33,10 @@
 
 .navbar-menu {
   list-style: none;
-  background-color: #0e743d;
+  background-color: var(--color-principal);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 60%;
-  height: 40%;
+  height: 35%;
   border-radius: 30px;
   margin: 0;
   padding: 0 30px;
@@ -41,17 +47,32 @@
 }
 
 .navbar-links {
+  position: relative;
   color: white;
   text-decoration: none;
-  font-size: 1rem;
-  padding: 8px 16px;
-  transition: background-color 0.3s;
+  font-size: 1.1rem;
+  padding: 10px 45px;
+  display: inline-flex;
+  transition: color 0.3s;
 }
 
-.navbar-links:hover {
-  background-color: #575757;
-  border-radius: 4px;
+.navbar-links::after {
+  content: "";
+  position: absolute;
+  bottom: 7px; /* más cerca del texto */
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background-color: white;
+  transform-origin: left;
+  transition: transform 0.6s ease;
 }
+
+.navbar-links:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
 
 /* ─── MENÚ DE USUARIO CON ICONO ──────────────────── */
 .user-menu {
@@ -68,11 +89,14 @@
   transition: color 0.2s, background-color 0.2s;
 }
 
+
 .user-btn:hover {
-  color: #ffeb3b;
-  background-color: #575757;
+  color: var(--color-secundario);
+  background-color: #777b80;
   border-radius: 4px;
 }
+
+
 
 /* Dropdown oculto por defecto */
 .user-dropdown {
@@ -117,6 +141,12 @@
 /* ─── BOTÓN GENERAL (queda oculto o lo puedes eliminar) ───────────────── */
 .navbar-btn {
   display: none; /* Ya no se usa, puesto que usamos user-menu */
+}
+
+.home svg{
+  fill: var(--color-principal);
+  width: 30px;
+  height: 30px;
 }
 
 /* ─── OPCIONAL: Responsive ───────────────────────── */

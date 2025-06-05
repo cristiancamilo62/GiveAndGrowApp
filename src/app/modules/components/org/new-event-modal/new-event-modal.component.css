@@ -1,0 +1,222 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(30, 7, 7, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.border {
+  background-color: var(--color-principal);
+  border-radius: 40px;
+  width: 90vw;    
+  height: 420px;        /* En lugar de 50% */
+  max-width: 850px;        /* Opcional, evita que sea demasiado ancho en pantallas grandes */
+  max-height: 90vh;        /* Ajusta a la altura de la pantalla */
+  margin-top: 50px;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* CORREGIDO: ancho fijo + centrado */
+.modal-container {
+  background-color: #e1e1e1;
+  border-radius: 20px;
+  width: 90%;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Header con título y botón X */
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  border-bottom: 1px solid #253036; /* Línea inferior */
+  padding-bottom: 10px;
+}
+
+.modal-header .header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    
+   
+}
+.modal-header .titulo {
+  display: flex;
+  font-size: 15px;
+  padding-left: 4px;
+  align-items: end;
+  color: var(--color-principal);
+}
+.modal-header .btn-cerrar {
+  background: transparent;
+  border: none;
+  color: #727070;
+  font-size: 1.25rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.modal-header .btn-cerrar:hover {
+    cursor: pointer;
+}
+
+.modal-header input {
+  margin: 0 20px;
+  border-radius: 20px;
+  height: 28px;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  
+}
+
+.modal-header input:hover {
+  border: none;
+}
+
+.modal-header input:focus {
+  border: none;
+  outline: none;
+}
+
+
+.modal-body{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+/* Columna izquierda para la imagen */
+.col-izq {
+    background-color: #f2f4f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 25px;
+    border-radius: 40px;
+}
+.col-izq .info{
+    color: gray;
+    font-size: 12px;
+}
+
+.icono-imagen {
+  font-size: 3rem;  
+}
+
+/* Columna derecha para el formulario */
+.col-der {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px 8px 20px;
+}
+.grid-2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px ;
+}
+
+.grid-2 .fila{
+    display: flex;
+    flex-direction: column;
+}
+.fila label{
+    padding-left: 4px;
+    font-size: 15px;
+    color: var(--color-principal);
+}
+
+.fila input{
+    height: 28px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+}
+
+
+.fila select{
+  height: 28px;
+  border-radius: 20px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+}
+
+.fila input:focus{
+    border: none;
+    outline: none;
+}
+
+.col-der .fila-descripcion{
+    display: flex;
+    flex-direction: column;
+}
+
+.fila-descripcion textarea {
+  text-align: left;           /* Alinea el texto correctamente */
+  vertical-align: top;        /* Mantiene el cursor en la parte superior */
+  padding: 10px 15px;         /* Evita que se vea centrado */
+  line-height: 1.4;
+  resize: vertical;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: 20px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.fila-descripcion textarea:focus{
+    border: none;
+    outline: none;
+}
+
+.fila-descripcion span{
+    padding-left: 12px;
+    font-size: 12px;
+    color: rgb(151, 147, 147);
+}
+.modal-footer{
+    display: flex;
+    justify-content: end;
+    align-items: center;    
+    padding-right: 20px;
+    padding-bottom: 4px;
+}
+
+.modal-footer .btn-publicar{
+    text-transform: uppercase;
+    color: #fff;
+    width: fit-content;
+    background-color: var(--color-principal);
+    border-radius: 20px;
+    height: 25px;
+    border: none;
+    outline: none;
+}
+.modal-footer .btn-publicar:focus{
+    border: none;
+    outline: none;
+}
+.modal-footer .btn-publicar:hover{
+    cursor: pointer;
+    background-color: var(--color-principal-hover);
+}

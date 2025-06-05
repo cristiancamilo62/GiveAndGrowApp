@@ -4,10 +4,11 @@ import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NavbarComponent } from "../../../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-form-register-user',
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, NavbarComponent],
   templateUrl: './form-register-user.component.html',
   styleUrl: './form-register-user.component.css'
 })
@@ -30,6 +31,8 @@ export class FormRegisterComponent {
     lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     middleLastName: ['', [Validators.minLength(3), Validators.maxLength(20)]],
     email: ['', [Validators.required, Validators.email]],
+    institution : ["", [Validators.required,]],
+    phoneOfReference: ["", [Validators.required,]],
     phoneNumber: ['', [Validators.required, Validators.pattern(this.numberPattern)]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
   });
@@ -59,6 +62,7 @@ export class FormRegisterComponent {
       /* -- callback de error -- */
       error: (err) => {
         this.error.set(err);
+        console.log(err);
         alert(err);
         this.loading.set(false);  // spinner OFF
       },

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user';
@@ -6,6 +5,7 @@ import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Organization } from '../models/organization';
 import { jwtDecode } from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +23,20 @@ export class AuthService {
   private userRoleSubject = new BehaviorSubject<string | null>(null);
   userRole$ = this.userRoleSubject.asObservable();
 
+  private authenticatedSubject = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = this.authenticatedSubject.asObservable();
+
   private _user: WritableSignal<User | Organization | null> = signal<User | null>(null);
   private _loading: WritableSignal<boolean> = signal<boolean>(false);
   private _error: WritableSignal<string | null> = signal<string | null>(null);
   private _isAuthenticated: WritableSignal<boolean> = signal<boolean>(false);
+  private _id : WritableSignal<string | null> = signal<string | null>(null);
 
   readonly user = computed(() => this._user());
   readonly loading = computed(() => this._loading());
   readonly isAuthenticated = computed(() => !!this._user());
   readonly authError = computed(() => this._error());
+  readonly id = computed(() => this._id());
 
   constructor(private cookieService: CookieService, private http: HttpClient, private router: Router) {
     this.restoreUserState();
@@ -39,17 +44,44 @@ export class AuthService {
 
   // Restaurar estado del usuario desde cookies
   private restoreUserState(): void {
-    const token = this.getToken();
-    const savedRole = this.getRole();
-    if (token && savedRole) {
-      this.userRoleSubject.next(savedRole);
-      const userData = this.getUserDataFromCookies();
-      if (userData) {
-        this._user.set(userData);
-        this._isAuthenticated.set(true);
-      }
+  const token = this.getToken();
+  const savedRole = this.getRole();
+
+  if (token && savedRole && !this.isTokenExpired(token)) {
+    this.userRoleSubject.next(savedRole);
+    const userData = this.getUserDataFromCookies();
+    if (userData) {
+      this._user.set(userData);
+      this._isAuthenticated.set(true);
+      this.authenticatedSubject.next(true); // <- para que `isAuthenticated$` también refleje el estado correcto
     }
+  } else {
+    this.logout(); // si el token está expirado o faltan datos, limpiamos todo
   }
+}
+
+private isTokenExpired(token: string): boolean {
+  try {
+    const decoded: any = jwtDecode(token);
+    const exp = decoded.exp;
+    if (!exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return exp < now;
+  } catch (e) {
+    return true;
+  }
+}
+
+
+
+  setAuthenticated(isAuth: boolean) {
+    this.authenticatedSubject.next(isAuth);
+  }
+
+  isAuthenticate(): boolean {
+    return this.authenticatedSubject.value;
+  }
+
 
   // Obtener datos del usuario desde cookies
   private getUserDataFromCookies(): User | Organization | null {
@@ -64,32 +96,43 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    this._loading.set(true);
-    this.cookieService.delete(this.TOKEN_KEY, '/');
-    this._user.set(null); // Clear user state before login
+  this._loading.set(true);
 
-    return this.http.post<any>(`${this.apiUrl}auth/login`, user).pipe(
-      tap(values => {
-        this.setToken(values.token);
-        this.setRoleAndIdByToken(values.token);
-        this._user.set(values.AuthenticatedUser);
-        this.saveUserData(values.AuthenticatedUser);
-        this._isAuthenticated.set(true);
-        this._loading.set(false);
-      }),
-      catchError(error => {
-        this._error.set(error);
-        this._loading.set(false);
-        return throwError(() => error);
-      })
-    );
-  }
+  // 🔥 Elimina completamente el estado anterior
+  this.cookieService.delete(this.TOKEN_KEY, '/');
+  this.cookieService.delete(this.ROLE_KEY, '/');
+  this.cookieService.delete(this.USER_ID_KEY, '/');
+  this.cookieService.delete(this.USER_DATA_KEY, '/');
 
-  registerUser(user: User): Observable<User> {
+  this._user.set(null);
+  this._id.set(null)
+  this._isAuthenticated.set(false);
+  this.userRoleSubject.next(null);
+
+  return this.http.post<any>(`${this.apiUrl}auth/login`, user).pipe(
+    tap(values => {
+      this.setToken(values.token);
+      this.setRoleAndIdByToken(values.token);
+      this._user.set(values.AuthenticatedUser);
+      this.saveUserData(values.AuthenticatedUser);
+      this._isAuthenticated.set(true);
+      this.setAuthenticated(true);
+      this._loading.set(false);
+    }),
+    catchError(error => {
+      this._error.set(error);
+      this._loading.set(false);
+      return throwError(() => error);
+    })
+  );
+}
+
+
+  registerUser(user: User): Observable<string> {
     this._loading.set(true);
-    return this.http.post<User>(`${this.apiUrl}users/r`, user).pipe(
-      tap(user => {
-        alert(user);
+    return this.http.post(`${this.apiUrl}users/r`, user,{responseType : "text"}).pipe(
+      tap(msg => {
+        alert(msg)
         this.router.navigate(['/login'], { queryParams: { email: user.email } });
         this._loading.set(false);
       }),
@@ -101,21 +144,22 @@ export class AuthService {
     );
   }
 
-  registerOrg(org: Organization): Observable<string> {
-    this._loading.set(true);
-    return this.http.post<string>(`${this.apiUrl}organizations`, org).pipe(
-      tap(msg => {
-        alert(msg);
-        this.router.navigate(['/login'], { queryParams: { email: org.email } });
-        this._loading.set(false);
-      }),
-      catchError(error => {
-        this._error.set(error);
-        this._loading.set(false);
-        return throwError(() => error);
-      })
-    );
-  }
+ registerOrg(org: Organization): Observable<string> {
+  this._loading.set(true);
+  return this.http.post(`${this.apiUrl}organizations`, org, { responseType: 'text' }).pipe(
+    tap(response => {
+      alert(response);
+      this.router.navigate(['/login'], { queryParams: { email: org.email } });
+      this._loading.set(false);
+    }),
+    catchError(error => {
+      this._error.set(error);
+      this._loading.set(false);
+      return throwError(() => error);
+    })
+  );
+}
+
 
   private setToken(token: string): void {
     this.cookieService.set(this.TOKEN_KEY, token, { expires: this.TOKEN_EXPIRATION_DAYS, secure: true, sameSite: 'Strict' });
@@ -143,6 +187,8 @@ export class AuthService {
       this.cookieService.set(this.ROLE_KEY, decodedToken.role, { expires: this.TOKEN_EXPIRATION_DAYS, secure: true, sameSite: 'Strict' });
       
       this.cookieService.set(this.USER_ID_KEY, decodedToken.id, { expires: this.TOKEN_EXPIRATION_DAYS, secure: true, sameSite: 'Strict'});
+      this._id.set(decodedToken.id)
+      console.log("id login",this.id());
       this.userRoleSubject.next(this.getRole());
     } catch (error) {
       console.error('Error decoding token', error);
@@ -163,7 +209,7 @@ export class AuthService {
   }
 
   getUserId(): string {
-    return this.cookieService.get(this.USER_ID_KEY);
+    return this.id() ?? '';
   }
 
   updateUserData(userData: User | Organization): void {
@@ -178,6 +224,7 @@ export class AuthService {
     this.clearUserData();
     this._user.set(null);
     this._isAuthenticated.set(false);
+    this.setAuthenticated(false);
     this.router.navigate(['/login']);
   }
 

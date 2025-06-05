@@ -28,11 +28,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       catchError((error : HttpErrorResponse) =>{
         console.log("Error en la petición", error);
         if(error.status === 401){
-          authService.removeToken();
           authService.setRedirectUrl("/login")
         }
         else if(error.status === 403){
             alert("No tienes los permisos necesarios para acceder a este recurso..")
+            authService.setRedirectUrl("/home")
         }
         return throwError(() => error.error);
       })

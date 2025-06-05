@@ -1,0 +1,110 @@
+<!-- src/app/modules/components/org/events/events-create.component.html -->
+<app-navbar></app-navbar>
+
+<div class="events-create-wrapper">
+
+  <!-- Título general -->
+  <div class="events-header">
+  <h2 class="events-title">TUS EVENTOS</h2>
+  <div class="create-new-row">
+    <button mat-button  (click)="openDialog()" class="btn-create-new" >
+      CREAR NUEVO EVENTO
+    </button>
+  </div>
+  </div>
+
+  <!-- Contenedor de cards: grid de 2 columnas (o el número que necesites) -->
+  <div class="cards-container">
+    <div
+      class="event-card"
+      *ngFor="let ev of events; index as i"
+      [attr.data-index]="i"
+    >
+      <!-- 
+        Si tu modelo Event tuviera un campo imageUrl, podrías mostrarla así:
+        <img class="card-image" [src]="ev.imageUrl" alt="{{ ev.name }}" /> 
+        En este ejemplo, usaremos un placeholder genérico:
+      -->
+      <img
+        class="card-image"
+        src="/home_1.jpg"
+        alt="{{ ev.name }}"
+      />
+
+      <!-- Contenido textual de la tarjeta -->
+      <div class="card-content">
+        <!-- Nombre/Título del evento -->
+        <div class="event-name">
+          <h3>{{ ev.name }}</h3> 
+        </div>
+
+        <!-- Dirección y Ciudad / Municipio -->
+        <div class="grid-2">
+          <div class="rows">
+          <div class="row">
+            <span class="label">Dirección:</span>
+            <span class="value">{{ev.address }}</span>
+          </div>
+          <div class="row">
+            <span class="label">Ciudad · Municipio:</span>
+            <span class="value">{{ ev.location }}</span>
+          </div>
+          <div class="row">
+              <span class="label">Vacantes</span>
+              <div class="label-volunter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     viewBox="0 0 24 24">
+                  <path d="M12 12c2.7 0 4.8-2.2 4.8-4.8S14.7 2.4 12 2.4 7.2 4.6 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+                <span class="value">{{ ev.maxParticipants - ev.currentParticipantsCount }}</span>
+              </div>
+            </div>
+        </div>
+
+        </div>
+
+        <!-- Fechas “Desde / Hasta” -->
+         <div class="grid-2">
+          <div class="rows">
+          <div class="row" >
+            <span class="label">inicio</span>
+            <span class="value">
+              {{ ev.startDateTime | date: 'EEEE dd MMM' }}
+            </span>
+          </div>
+          <div class="separador"></div>
+          <div class="row">
+            <span class="label">fecha maxima incripcion</span>
+            <span class="value">
+              {{ ev.registrationDeadline | date: 'EEEE dd MMM' }}
+            </span>
+          </div>
+          </div>
+        
+
+        <!-- Cantidad de voluntarios -->
+        <div class="row" id="voluntes">
+              <span class="label">Categoría</span>
+              <span class="value">{{ ev.category | uppercase }}</span>
+            </div>
+
+        </div>
+
+        <!-- Botones -->
+        <div class="buttons-row">
+          <button (click)="onEdit(ev)" class="btn-edit">EDITAR</button>
+          <button (click)="onDelete(ev.id)" class="btn-delete">ELIMINAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Si no hay ningún evento, mostramos mensaje alternativo -->
+  <div *ngIf="!events || events.length === 0" class="no-events">
+    <p>No hay eventos disponibles.</p>
+  </div>
+
+  <!-- Botón para crear un nuevo evento al final de la sección -->
+  
+</div>
+

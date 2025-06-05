@@ -1,21 +1,35 @@
+<app-navbar></app-navbar>
+
 <section class="wrapper">
-    <!-- panel ilustrado (solo desktop) -->
-    <aside class="art"></aside>
   
-    <!-- CARD CONTENEDORA -->
+  <!-- Ilustración de fondo (solo desktop) -->
+  <aside class="art"></aside>
+
+
+  <div class="card-box">
+    <!-- Panel blanco con mensaje -->
+    <article class="info">
+      <div class="text">
+        <h2>¿Algo cambió?</h2>
+        <p>
+          Actualiza tu información para que podamos conectarte con las mejores causas.
+        <strong class="line">_____________</strong></p>
+      </div>
+    </article>
+
+    <!-- ======== TU FORMULARIO TAL CUAL ========== -->
     <form
       class="card"
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
       novalidate
     >
-      <h1 class="title">CREATE ACCOUNT</h1>
-
   <!-- ─── IDENTIFICACIÓN ───────────────────────────── -->
   <label class="field">
     <span>Cédula / Identificación *</span>
     <input
       type="text"
+      id="only"
       formControlName="identification"
       placeholder="1234567890"
     />
@@ -78,8 +92,8 @@
   </div>
 
   <!-- ─── EMAIL ────────────────────────────────────── -->
-  <div class="grid-2">
-    <label class="field">
+   <div class="grid-2">
+  <label class="field">
     <span>Correo electrónico *</span>
     <input
       type="email"
@@ -99,7 +113,8 @@
     </small>
   </label>
 
-  <!-- ─── TELÉFONO ─────────────────────────────────── -->
+  
+  <!-- ─── telefono ───────────────────────────────── -->
   <label class="field">
     <span>Teléfono / Celular *</span>
     <input
@@ -119,21 +134,59 @@
       </ng-container>
     </small>
   </label>
+   </div>
+
+     <!-- ─── institucion educativa ───────────────────────────────── -->
+   <div class="grid-2">
+  <label class="field">
+    <span>institucion educatica *</span>
+    <input
+      type="institution"
+      formControlName="institution"
+      placeholder="Universida ..."
+    />
+    <small
+      class="error"
+      *ngIf="control('institution').errors && (control('institution').dirty || control('institution').touched)"
+    >
+      <ng-container *ngIf="control('institution').errors?.['required']">
+        Requerido.
+      </ng-container>
+    </small>
+  </label>
+
+  
+  <!-- ─── Telefono referencia ───────────────────────────────── -->
+  <label class="field">
+    <span>Teléfono referencia *</span>
+    <input type="text" formControlName="phoneOfReference" />
+    <small
+      class="error"
+      *ngIf="control('phoneOfNumber').errors && (control('phoneOfReference').dirty || control('phoneOfReference').touched)"
+    >
+      <ng-container *ngIf="control('phoneOfReference').errors?.['required']">
+        Requerido.
+      </ng-container>
+    </small>
+  </label>
+   </div>
+
+
+  <!-- ─── TELÉFONO ─────────────────────────────────── -->
+   <div class="btn-update">
+
+    <button class="btn" type="submit" [disabled]="!form.valid || loading()">
+         ACTUALIZAR
+        </button>
+
   </div>
 
-  <p class="error center" *ngIf="error()">{{ error() }}</p>
-
-    <!-- SUBMIT -->
-    <button class="btn" type="submit">
-      <span *ngIf="!loading()">Guardar usuario</span>
-      <span *ngIf="loading()">Procesando…</span>
-    </button>
-
-    <p class="center">
-      ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
-  </form>
-
-  <div class="white">
+  <!--<p class="error center" *ngIf="error()">{{ error() }}</p>-->
+    </form>
   </div>
-
 </section>
+
+
+
+
+

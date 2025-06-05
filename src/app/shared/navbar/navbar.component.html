@@ -1,9 +1,9 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <a class="navbar-logo" routerLink="/">VOLUNTARIOS</a>
-    <ul class="navbar-menu">
+    <img class="logo" src="/logo.png" alt="logo">
+    <ul *ngIf="isAuthenticated" class="navbar-menu">
       <li class="navbar-item">
-        <a class="navbar-links" routerLink="/">HOME</a>
+        <a  class="navbar-links" routerLink="/">HOME</a>
       </li>
       <li class="navbar-item">
         <a class="navbar-links" routerLink="/about">SERVICES</a>
@@ -15,30 +15,39 @@
         <a class="navbar-links" routerLink="/contact">CONTACT</a>
       </li>
     </ul>
-
-
-
+   
     
+
     <!-- Menú de usuario -->
     <div class="user-menu">
+      
       <!-- Icono de usuario -->
-      <button class="user-btn" aria-label="Menú de usuario">
+      <button *ngIf="!currentRoute" class="user-btn" aria-label="Menú de usuario">
         <!-- Puedes cambiar este SVG por otro o usar FontAwesome/lucide-angular -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+        <svg   xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
              viewBox="0 0 24 24">
           <path d="M12 12c2.7 0 4.8-2.2 4.8-4.8S14.7 2.4 12 2.4 7.2 4.6 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
         </svg>
+        
       </button>
       <!-- Dropdown -->
       <ul class="user-dropdown">
-        <li *ngIf="!isAuthenticated"><a  routerLink="/login">Iniciar sesión</a></li>
-        <li *ngIf="!isAuthenticated"><a routerLink="/register">Registrar usuario</a></li>
-        <li *ngIf="!isAuthenticated"><a routerLink="/registerOrg">Registrar org</a></li>
-        <li *ngIf="isAuthenticated"><a routerLink="/updateUser">update user</a></li>
-        <li *ngIf="isAuthenticated"><a (click)="logout()">logout</a></li>
+  <li *ngIf="!isAuthenticated"><a routerLink="/login">Iniciar sesión</a></li>
+  <li *ngIf="!isAuthenticated"><a routerLink="/register">Registrar usuario</a></li>
+  <li *ngIf="!isAuthenticated"><a routerLink="/registerOrg">Registrar org</a></li>
 
-        <!-- puedes añadir más opciones -->
-      </ul>
+  <li *ngIf="isAuthenticated && userRole=='ROLE_USER'"><a routerLink="/updateUser">update user</a></li>
+  <li *ngIf="isAuthenticated  && userRole == 'ROLE_ORG'"><a routerLink="/updateOrg">update org</a></li>
+  <li *ngIf="isAuthenticated"><a (click)="logout()">logout</a></li>
+
+
+</ul>
     </div>
+      <a *ngIf="currentRoute" class="home" routerLink="/home">
+        <svg  class="icon-home" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+      </a>
   </div>
 </nav>

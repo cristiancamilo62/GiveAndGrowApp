@@ -5,10 +5,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../core/models/user';
+import { NavbarComponent } from "../../../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, NavbarComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })

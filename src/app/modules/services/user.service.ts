@@ -12,8 +12,8 @@ export class UserService {
 
   private http = inject(HttpClient);
 
-  updateUser(userUpdate: User) : Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}`, userUpdate, { responseType:'json' })
+  updateUser(userUpdate: User) : Observable<string> {
+    return this.http.put(`${this.apiUrl}`, userUpdate, { responseType:'text' })
       
   }
 

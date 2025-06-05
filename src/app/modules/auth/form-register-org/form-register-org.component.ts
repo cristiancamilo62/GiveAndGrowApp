@@ -4,10 +4,11 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Organization } from '../../../core/models/organization';
 import { CommonModule } from '@angular/common';
 import { RouteConfigLoadEnd, RouterLink } from '@angular/router';
+import { NavbarComponent } from "../../../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-form-register-org',
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, NavbarComponent],
   templateUrl: './form-register-org.component.html',
   styleUrl: './form-register-org.component.css'
 })
@@ -25,8 +26,8 @@ export class FormRegisterOrgComponent {
 
   /* ───────── REACTIVE FORM ───────── */
   readonly form = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-    identification: ["", [Validators.required, Validators.minLength(7), Validators.maxLength(15)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    nit: ["", [Validators.required, Validators.minLength(7), Validators.maxLength(15)]],
     description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
     contactNumber: ['', [Validators.required, Validators.pattern(this.numberPattern)]],
     email: ['', [Validators.required, Validators.email]],
