@@ -14,8 +14,29 @@
       <!-- Body -->
       <div class="modal-body">
         <div class="col-izq">
-          <span class="icono-imagen">📷</span>
-          <span class="info">cargar imagen</span>
+
+          <div *ngIf="!imageUrl && !uploading" class="icono-imagen-container">
+            <label class="icono-imagen" for="inputImagen">
+              📷
+            </label>
+            <input
+              type="file"
+              id="inputImagen"
+              accept="image/*"
+              style="display:none"
+              (change)="onFileSelected($event)"
+            />
+            <span class="info">Cargar imagen</span>
+
+          </div>
+          
+          <!-- Muestra previsualización si hay imagen -->
+          <div *ngIf="imageUrl" class="preview-img">
+            <img [src]="imageUrl" alt="Imagen evento" />
+          </div>
+
+          <!-- Mensaje de carga -->
+          <div *ngIf="uploading">Subiendo imagen...</div>
         </div>
 
         <div class="col-der">
@@ -25,19 +46,37 @@
               <input type="text" formControlName="address" placeholder="Dirección" />
             </div>
             <div class="fila">
-              <label>Ciudad:</label>
-              <input type="text" formControlName="location" placeholder="Ciudad" />
-            </div>
+  <label for="location">Ciudad:</label>
+  <ng-container *ngIf="!selectedDepartmentId; else ciudadSelect">
+    <select (change)="onDepartmentSelect($event)">
+      <option value="" disabled selected>Seleccione departamento</option>
+      <option *ngFor="let dep of departamentos" [value]="dep.id">
+        {{ dep.name }}
+      </option>
+    </select>
+  </ng-container>
+
+  <ng-template #ciudadSelect>
+    <select (change)="onCitySelect($event)">
+      <option value="" disabled selected>Seleccione ciudad o municipio</option>
+      <option *ngFor="let city of ciudades" [value]="city">
+        {{ city }}
+      </option>
+    </select>
+  </ng-template>
+</div>
+
+
           </div>
 
           <div class="grid-2">
             <div class="fila">
               <label>Fecha Inicio:</label>
-              <input type="date" formControlName="startDateTime" />
+              <input type="datetime-local" formControlName="startDateTime" />
             </div>
             <div class="fila">
               <label>Fecha Límite Postulación:</label>
-              <input type="date" formControlName="registrationDeadline" />
+              <input type="datetime-local" formControlName="registrationDeadline" />
             </div>
           </div>
 

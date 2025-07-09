@@ -48,10 +48,11 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: () => {
+
         this.router.navigate(['/home']);
       },
-      error: (err) => {
-        alert(err);
+      error: () => {
+        alert(this.authService.authError());
       }
     });
   }

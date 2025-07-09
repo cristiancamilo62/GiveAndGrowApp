@@ -101,24 +101,85 @@
     grid-template-columns: 1fr 2fr;
 }
 
-/* Columna izquierda para la imagen */
+/* Contenedor columna izquierda */
 .col-izq {
-    background-color: #f2f4f3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 30px 25px;
-    border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 32px 8px 32px 24px;
+  border-radius: 32px;
+  max-height: 250px;
 }
-.col-izq .info{
-    color: gray;
-    font-size: 12px;
+
+.col-izq .info {
+  color: #7c8a8e;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* Ícono de la cámara */
+.icono-imagen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 180px;
+  justify-content: center;
 }
 
 .icono-imagen {
-  font-size: 3rem;  
+  font-size: 3.2rem;
+  color: #38ae60;
+  cursor: pointer;
+  transition: color .2s;
 }
+.icono-imagen:hover {
+  color: #267048;
+}
+
+/* Previsualización de la imagen */
+.preview-img {
+  width: 100% ;
+  height: 100%;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 2px 14px 0 rgba(60, 90, 90, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 10px 0 0 0;
+  position: relative;
+  border: 2px solid #e4e9ea;
+}
+
+.preview-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;   /* Garantiza que la imagen se recorte perfectamente dentro del cuadro */
+  object-position: center;
+  border-radius: 16px;
+  transition: filter .18s;
+  background: #f7f9fa;
+  /* nítido en la mayoría de pantallas retina */
+  image-rendering: auto;
+}
+
+/* Texto de subida */
+.uploading-text {
+  color: #269865;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 20px;
+  text-align: center;
+  animation: blink .9s infinite alternate;
+}
+
+@keyframes blink {
+  to { opacity: .6; }
+}
+
 
 /* Columna derecha para el formulario */
 .col-der {

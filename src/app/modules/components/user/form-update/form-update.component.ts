@@ -6,6 +6,7 @@ import { User } from '../../../../core/models/user';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from "../../../../shared/navbar/navbar.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-update',
@@ -35,10 +36,13 @@ export class FormUpdateComponent implements OnInit {
   constructor() {
     // Inyectamos el usuario desde el servicio AuthService
     this.user = this.authService.user() as User;  // Asegúrate de que el tipo sea correcto
+
+    console.log("usuario a editar contructor ", this.authService.id());
+    
   }
 
   ngOnInit(): void {
-    console.log("este es el usuario a actualizar con el computed",this.user);
+    console.log("id usuario a editar",this.authService.id());
     // Verificamos que el usuario esté disponible antes de usarlo
     if (this.user) {
       this.form = this.fb.group({
@@ -64,24 +68,56 @@ export class FormUpdateComponent implements OnInit {
 
   // Método para manejar la actualización del formulario
   onSubmit(): void {
-    if (this.form.valid) {
-      const updatedUser = this.form.value;
-      updatedUser.password = this.passwordPersistida;  // Mantener la contraseña original 
-      updatedUser.id = this.authService.getUserId();  // Asegúrate de que el ID del usuario esté presente
-      console.log(updatedUser);
-      this.userService.updateUser(updatedUser).subscribe(
-        (response) => {
-          alert(response)
-          this.authService.updateUserData(updatedUser);
-          this.route.navigate(["/home"]);
-        },
-        (error) => {
-          this.error.set('Error al actualizar el usuario');
-          console.log(error);
-        }
-      );
-    }
+  if (this.form.valid) {
+    const updatedUser = this.form.value;
+    updatedUser.password = this.passwordPersistida;
+    updatedUser.id =  this.authService.id();  // Asegúrate de que el ID del usuario esté presente
+
+    console.log("usaurio listo pa mandar",updatedUser);
+
+    this.userService.updateUser(updatedUser).subscribe({
+      next: (response) => {
+        Swal.fire({
+          title: '¡Perfil actualizado!',
+          text: response.message,
+          icon: 'success',
+          confirmButtonColor: '#0e743d',
+          background: '#fff',
+          color: '#000',
+          confirmButtonText: 'OK'
+        });
+        this.authService.updateUserData(updatedUser);
+        this.route.navigate(['/home']);
+      },
+      error: (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.message || 'No se pudo actualizar el perfil',
+          icon: 'warning',
+          confirmButtonColor: '#cae838',
+          background: '#cae838',
+          color: '#000',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+  } else {
+    this.form.markAllAsTouched();
+    Swal.fire({
+      title: 'Formulario inválido',
+      text: 'Por favor completa todos los campos obligatorios correctamente',
+      icon: 'warning',
+      confirmButtonColor: '#cae838',
+      background: '#fff',
+      color: '#000',
+      confirmButtonText: 'OK',
+      customClass: {
+        confirmButton: 'custom-black-button'
+      }
+    });
   }
+}
+
 
   // Control para acceso reactivo al formulario
   control(name: keyof typeof this.form.controls): AbstractControl {

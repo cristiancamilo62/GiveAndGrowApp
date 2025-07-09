@@ -4,6 +4,8 @@ import { Event } from '../../../../core//models/event';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-events-user',
@@ -21,7 +23,7 @@ export class EventsUserComponent implements OnInit {
   selectedCategory: string = ''; // Categoría seleccionada
   searchLocation: string = ''; // Localidad ingresada
 
-  constructor(private eventService: EventService,
+  constructor(private eventService: EventService,private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -73,8 +75,30 @@ export class EventsUserComponent implements OnInit {
   }
 
 
-  onApply(eventId: string | undefined) {
-    // Implement the logic for applying to an event
-    console.log('Applying for event:', eventId);
-  }
+  onApply(event: Event) {
+  Swal.fire({
+    title: '¡Solicitud enviada!',
+    html: `
+      <div style="font-size: 16px; text-align: left;">
+        <p><strong>Evento:</strong> ${event.name}</p>
+        <p><strong>Ubicación:</strong> ${event.location}</p>
+        <p><strong>Fecha de inicio:</strong> ${new Date(event.startDateTime).toLocaleDateString()}</p>
+        <hr style="margin: 10px 0;">
+        <p style="margin: 0;">Tu solicitud ha sido <strong>enviada correctamente</strong> a la organización.</p>
+        <p style="margin: 10px 0 0 0;">Pronto recibirás una <strong>respuesta al correo electrónico ${this.authService.user()?.email}</strong> que tienes registrado en nuestra plataforma.</p>
+      </div>
+    `,
+    icon: 'success',
+    background: '#ffffff',
+    color: '#000000',
+    confirmButtonText: 'OK',
+    confirmButtonColor: '#0e743d',
+    customClass: {
+      popup: 'custom-alert-popup'
+    }
+  });
+
+  console.log('Applying for event:', event);
+}
+
 }

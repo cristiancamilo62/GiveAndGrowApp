@@ -87,7 +87,7 @@
 
     <label class="field">
       <span>Segundo apellido</span>
-      <input type="text" formControlName="middleLastName" />
+      <input type="text" formControlName="middleLastName"/>
     </label>
   </div>
 
@@ -162,7 +162,7 @@
     <input type="text" formControlName="phoneOfReference" />
     <small
       class="error"
-      *ngIf="control('phoneOfNumber').errors && (control('phoneOfReference').dirty || control('phoneOfReference').touched)"
+      *ngIf="control('phoneOfReference').errors && (control('phoneOfReference').dirty || control('phoneOfReference').touched)"
     >
       <ng-container *ngIf="control('phoneOfReference').errors?.['required']">
         Requerido.

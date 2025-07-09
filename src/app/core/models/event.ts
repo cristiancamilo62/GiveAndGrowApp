@@ -1,6 +1,7 @@
 export interface Event {
   id?: string;
   name: string;
+  imageUrl?: string; // Optional, can be set later
   startDateTime: string; // ISO format date (yyyy-MM-dd)
   registrationDeadline: string; // ISO format date
   location: string;

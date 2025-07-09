@@ -12,9 +12,9 @@ export class UserService {
 
   private http = inject(HttpClient);
 
-  updateUser(userUpdate: User) : Observable<string> {
-    return this.http.put(`${this.apiUrl}`, userUpdate, { responseType:'text' })
-      
+  updateUser(userUpdate: User) : Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}`, userUpdate, { responseType:'json' })
+
   }
 
 }
